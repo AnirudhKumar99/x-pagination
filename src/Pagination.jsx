@@ -26,8 +26,8 @@ export const Pagination = () => {
       .then((response) => response.json())
       .then((result) => handleData(result))
       .catch((error) => {
+          alert("failed to fetch data");
         console.log("Error fetching employee data: ", error);
-        alert("Failed to fetch data. Please try again later.");
       });
   }, []);
   useEffect(() => {
