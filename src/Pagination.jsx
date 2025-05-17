@@ -25,7 +25,10 @@ export const Pagination = () => {
     )
       .then((response) => response.json())
       .then((result) => handleData(result))
-      .catch((error) => console.log("Error fetching employee data: ", error));
+      .catch((error) => {
+        console.log("Error fetching employee data: ", error);
+        alert("Failed to fetch data. Please try again later.");
+      });
   }, []);
   useEffect(() => {
     const startIdx = pageNo * perPageCount;
@@ -39,17 +42,17 @@ export const Pagination = () => {
     backgroundColor: " #04AA6D",
     color: "white",
   };
-  const trStyles={
+  const trStyles = {
     paddingTop: "8px",
     textAlign: "left",
   };
-  const buttonStyles={
-    padding:"8px",
-    borderRadius:"5px",
+  const buttonStyles = {
+    padding: "8px",
+    borderRadius: "5px",
     backgroundColor: " #04AA6D",
     color: "white",
-    border:"0"
-  }
+    border: "0",
+  };
   return (
     <div
       style={{
@@ -66,43 +69,49 @@ export const Pagination = () => {
           <table
             style={{
               width: "100vw",
-              padding:"10px",
-              border:"none"
+              padding: "10px",
+              border: "none",
             }}
           >
             <thead>
               <tr>
-                <th style={thStyles} >ID</th>
-                <th style={thStyles} >Name</th>
-                <th style={thStyles} >Email</th>
-                <th style={thStyles} >Role</th>
+                <th style={thStyles}>ID</th>
+                <th style={thStyles}>Name</th>
+                <th style={thStyles}>Email</th>
+                <th style={thStyles}>Role</th>
               </tr>
             </thead>
             <tbody>
               {pageData.map((row, idx) => {
                 return (
-                  <tr key={idx}  >
-                    <td style={trStyles} >{row.id} </td>
-                    <td style={trStyles} >{row.name} </td>
-                    <td style={trStyles} >{row.email} </td>
-                    <td style={trStyles} >{row.role} </td>
+                  <tr key={idx}>
+                    <td style={trStyles}>{row.id} </td>
+                    <td style={trStyles}>{row.name} </td>
+                    <td style={trStyles}>{row.email} </td>
+                    <td style={trStyles}>{row.role} </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          <div style={{
-            display:"flex",
-            width:"100%",
-            justifyContent:"center",
-            alignItems:"center",
-            textAlign:"center",
-            gap:"10px",
-            marginTop:"20px"
-          }} >
-            <button style={buttonStyles}  onClick={DecrementPageNo}>Previous</button>
-            <p style={buttonStyles} >{pageNo + 1} </p>
-            <button style={buttonStyles} onClick={IncrementPageNo}>Next</button>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              gap: "10px",
+              marginTop: "20px",
+            }}
+          >
+            <button style={buttonStyles} onClick={DecrementPageNo}>
+              Previous
+            </button>
+            <p style={buttonStyles}>{pageNo + 1} </p>
+            <button style={buttonStyles} onClick={IncrementPageNo}>
+              Next
+            </button>
           </div>
         </div>
       )}
